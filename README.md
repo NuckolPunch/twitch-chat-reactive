@@ -1,31 +1,45 @@
-# Twitch Chat Reactive Overlay
-
-This repository hosts a simple Twitch chat reactive PNG swapper overlay you can use in OBS.
-
-## How to use
-
-1. Upload your PNG images somewhere accessible online (e.g., Imgur, Cloudinary).
-
-2. Open the URL with query parameters for your Twitch channel and image URLs, for example:
-
-https://nuckolpunch.github.io/chat-reactive-overlay/chat_reactive.html?channel=YourTwitchName&idle=https://i.imgur.com/abc.png&reacting=https://i.imgur.com/xyz.png&duration=1500
-
-https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive.html?channel=nuckolpunch&idle=https://i.imgur.com/WryOIK9.png&reacting=https://i.imgur.com/v6c7Ext.png&duration=2000
-
-
-- `channel` — Your Twitch channel name (no `#`)
-- `idle` — URL to your idle PNG image
-- `reacting` — URL to your reacting PNG image
-- `duration` — Optional. How long to show the reacting image in milliseconds (default 1500)
-
-3. Add this URL as a **Browser Source** in OBS.
-
-## Notes
-
-- This overlay connects anonymously to Twitch chat.
-- No backend server required; this is fully client-side.
-- Make sure your images are publicly accessible via HTTPS.
-
+# Chat Reactive Overlay for Twitch
+A lightweight browser-based Twitch chat reactive PNG overlay for OBS.  
+Switches between an idle image and talking animation when chat messages arrive.
 ---
+## Available Overlay Versions
+### 1) Full Featured (chat_reactive_full.html)  
+Supports all parameters including special question/exclaim reactions, animation speed, random mode, talk delay, etc.  
+Best for advanced customization.
+### 2) Simple (chat_reactive_simple.html)  
+Supports: `idle`, `reacting`, `duration`, `speed`, `random`  
+No special reactions (`question` or `exclaim`). Easier URLs and setup.
+### 3) Minimal (chat_reactive_minimal.html)  
+Supports only `idle` and one `reacting` image (no animation, no timing params).  
+Good for beginners or quick testing.
+---
+## How to Use
+Upload your PNG images somewhere with direct URLs (e.g., Imgur) and build a URL like this to use in OBS as a Browser Source.
+### Full Featured Example URL
+```
+https://yourusername.github.io/chat-reactive-overlay/chat_reactive_full.html?channel=MyTwitchName&idle=IDLE_URL&reacting=TALK1,TALK2&question=QUES1,QUES2&exclaim=EXCL1,EXCL2&duration=1500&speed=150&random=true&talkdelay=3000
+```
+### Simple Example URL
+```
+https://yourusername.github.io/chat-reactive-overlay/chat_reactive_simple.html?channel=MyTwitchName&idle=IDLE_URL&reacting=TALK1,TALK2&duration=1500&speed=150&random=true
+```
+### Minimal Example URL
+```
+https://yourusername.github.io/chat-reactive-overlay/chat_reactive_minimal.html?channel=MyTwitchName&idle=IDLE_URL&reacting=REACT_URL
+```
+---
+## Notes on Image URLs
+- Use direct PNG links (ending in `.png`).  
+- Imgur example: right-click image → Copy Image Address (not page URL).  
+- Users should host and supply their own images to customize fully.
+---
+## OBS Setup
+1. Add a Browser Source in OBS.  
+2. Paste your overlay URL with your images and parameters.  
+3. Set the size to your PNG resolution or your desired layout size.  
+4. Enable *Shutdown source when not visible* and *Refresh browser when scene becomes active* (recommended).  
+5. Enjoy your chat reactive avatar!
+---
+## License
 
-Made for easy Twitch overlays. Enjoy!
+MIT License
