@@ -1,75 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Twitch Chat Reactive PNG</title>
-  <style>
-    body {
-      margin: 0;
-      background: transparent;
-      overflow: hidden;
-    }
-    #idle, #reacting {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 300px;
-    }
-    #reacting {
-      display: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Chat Reactive</title>
+<style>
+  body {
+    margin: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+  #avatar {
+    width: 100%;
+    height: 100%;
+  }
+</style>
 </head>
 <body>
+<img id="avatar" src="" alt="avatar">
 
-<img id="idle" alt="Idle">
-<img id="reacting" alt="Reacting">
-
+<script src="https://cdn.jsdelivr.net/npm/tmi.js@1.8.5"></script>
 <script>
+  // --- Get query parameters ---
   const urlParams = new URLSearchParams(window.location.search);
   const channelName = urlParams.get('channel');
   const idleImg = urlParams.get('idle');
-  const reactingImg = urlParams.get('reacting');
-  const duration = parseInt(urlParams.get('duration')) || 1500;
+  const talkingImg = urlParams.get('reacting');
+  const duration = parseInt(urlParams.get('duration') || '1500', 10);
 
-  if (!channelName || !idleImg || !reactingImg) {
-    document.body.innerHTML = `
-      <div style="color: white; font-family: sans-serif; padding: 20px;">
-        <h2>Missing required parameters.</h2>
-        <p>Example usage:</p>
-        <code>?channel=YourName&idle=https://example.com/idle.png&reacting=https://example.com/talk.png&duration=1500</code>
-      </div>`;
-    throw new Error("Missing parameters");
-  }
+  const avatar = document.getElementById('avatar');
+  avatar.src = idleImg;
 
-  document.getElementById("idle").src = idleImg;
-  document.getElementById("reacting").src = reactingImg;
+  let revertTimeout;
 
-  const socket = new WebSocket("wss://irc-ws.chat.twitch.tv:443");
+  function startConnection() {
+    console.log("Connecting to Twitch chat...");
 
-  socket.addEventListener('open', () => {
-    const guestNick = 'justinfan' + Math.floor(Math.random() * 100000);
-    socket.send('NICK ' + guestNick);
-    socket.send('JOIN #' + channelName);
-    console.log(`Connected to Twitch chat as ${guestNick} in #${channelName}`);
-  });
+    const client = new tmi.Client({
+      channels: [channelName]
+    });
 
-  socket.addEventListener('message', (event) => {
-    if (event.data.includes("PRIVMSG")) {
-      showReaction();
+    client.connect().catch(err => {
+      console.error("Connection error:", err);
+      retryConnection();
+    });
+
+    client.on('message', () => {
+      avatar.src = talkingImg;
+      clearTimeout(revertTimeout);
+      revertTimeout = setTimeout(() => {
+        avatar.src = idleImg;
+      }, duration);
+    });
+
+    client.on('disconnected', () => {
+      console.warn("Disconnected from Twitch chat. Retrying in 5s...");
+      retryConnection();
+    });
+
+    function retryConnection() {
+      setTimeout(() => {
+        startConnection();
+      }, 5000);
     }
-  });
-
-  function showReaction() {
-    document.getElementById("idle").style.display = "none";
-    document.getElementById("reacting").style.display = "block";
-
-    setTimeout(() => {
-      document.getElementById("idle").style.display = "block";
-      document.getElementById("reacting").style.display = "none";
-    }, duration);
   }
-</script>
 
+  startConnection();
+</script>
 </body>
 </html>
