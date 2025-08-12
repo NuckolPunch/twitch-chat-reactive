@@ -18,14 +18,6 @@ https://yourusername.github.io/chat-reactive-overlay/chat_reactive.html?channel=
 
 3. Add this URL as a **Browser Source** in OBS.
 
-## Deploying on GitHub Pages
-
-- Make sure GitHub Pages is enabled in your repo settings (choose main branch and root folder).
-- Your overlay will be served at:
-
-https://yourusername.github.io/chat-reactive-overlay/chat_reactive.html
-
-
 ## Notes
 
 - This overlay connects anonymously to Twitch chat.
