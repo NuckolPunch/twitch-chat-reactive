@@ -10,6 +10,8 @@ This repository hosts a simple Twitch chat reactive PNG swapper overlay you can 
 
 https://yourusername.github.io/chat-reactive-overlay/chat_reactive.html?channel=YourTwitchName&idle=https://i.imgur.com/abc.png&reacting=https://i.imgur.com/xyz.png&duration=1500
 
+https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive.html?channel=jonbrimstone&idle=https://i.imgur.com/WryOIK9.png&reacting=https://i.imgur.com/v6c7Ext.png&duration=2000
+
 
 - `channel` — Your Twitch channel name (no `#`)
 - `idle` — URL to your idle PNG image
