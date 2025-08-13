@@ -19,7 +19,8 @@ Good for beginners or quick testing.
 Upload your PNG images somewhere with direct URLs (e.g., Imgur) and build a URL like this to use in OBS as a Browser Source.
 ```
 https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive.html?channel=MyTwitchName&idle=IDLE_URL&reacting=eacting=REACT_URL&duration=2000
-
+```
+```
 https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive.html?channel=nuckolpunch&idle=https://i.imgur.com/WryOIK9.png&reacting=https://i.imgur.com/v6c7Ext.png&duration=2000
 ```
 ### Full Featured Example URL
