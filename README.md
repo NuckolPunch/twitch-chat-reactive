@@ -3,29 +3,36 @@ A lightweight browser-based Twitch chat reactive PNG overlay for OBS.
 Switches between an idle image and talking animation when chat messages arrive.
 ---
 ## Available Overlay Versions
-### 1) Full Featured (chat_reactive_full.html)  
+### 1) Original (chat_react.html)
+Supports only `idle` and one `reacting` image with the inclusion of `duration` and `speed`
+### 2) Full Featured (chat_reactive_full.html)  
 Supports all parameters including special question/exclaim reactions, animation speed, random mode, talk delay, etc.  
 Best for advanced customization.
-### 2) Simple (chat_reactive_simple.html)  
+### 3) Simple (chat_reactive_simple.html)  
 Supports: `idle`, `reacting`, `duration`, `speed`, `random`  
 No special reactions (`question` or `exclaim`). Easier URLs and setup.
-### 3) Minimal (chat_reactive_minimal.html)  
+### 4) Minimal (chat_reactive_minimal.html)  
 Supports only `idle` and one `reacting` image (no animation, no timing params).  
 Good for beginners or quick testing.
 ---
 ## How to Use
 Upload your PNG images somewhere with direct URLs (e.g., Imgur) and build a URL like this to use in OBS as a Browser Source.
+```
+https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive.html?channel=MyTwitchName&idle=IDLE_URL&reacting=eacting=REACT_URL&duration=2000
+
+https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive.html?channel=nuckolpunch&idle=https://i.imgur.com/WryOIK9.png&reacting=https://i.imgur.com/v6c7Ext.png&duration=2000
+```
 ### Full Featured Example URL
 ```
-https://yourusername.github.io/chat-reactive-overlay/chat_reactive_full.html?channel=MyTwitchName&idle=IDLE_URL&reacting=TALK1,TALK2&question=QUES1,QUES2&exclaim=EXCL1,EXCL2&duration=1500&speed=150&random=true&talkdelay=3000
+https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive_full.html?channel=MyTwitchName&idle=IDLE_URL&reacting=TALK1,TALK2&question=QUES1,QUES2&exclaim=EXCL1,EXCL2&duration=1500&speed=150&random=true&talkdelay=3000
 ```
 ### Simple Example URL
 ```
-https://yourusername.github.io/chat-reactive-overlay/chat_reactive_simple.html?channel=MyTwitchName&idle=IDLE_URL&reacting=TALK1,TALK2&duration=1500&speed=150&random=true
+https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive_simple.html?channel=MyTwitchName&idle=IDLE_URL&reacting=TALK1,TALK2&duration=1500&speed=150&random=true
 ```
 ### Minimal Example URL
 ```
-https://yourusername.github.io/chat-reactive-overlay/chat_reactive_minimal.html?channel=MyTwitchName&idle=IDLE_URL&reacting=REACT_URL
+https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive_minimal.html?channel=MyTwitchName&idle=IDLE_URL&reacting=REACT_URL
 ```
 ---
 ## Notes on Image URLs
