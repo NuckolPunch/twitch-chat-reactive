@@ -5,7 +5,7 @@ Switches between an idle image and talking animation when chat messages arrive.
 ## Available Overlay Versions
 ### 1) Original (chat_react.html)
 Supports only `idle` and one `reacting` image with the inclusion of `duration` and `speed`
-### 2) Full Featured (chat_reactive_full.html)  
+### 2) Full Featured (chat_reactive_advanced.html)  
 Supports all parameters including special question/exclaim reactions, animation speed, random mode, talk delay, etc.  
 Best for advanced customization.
 ### 3) Simple (chat_reactive_simple.html)  
@@ -25,7 +25,7 @@ https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive.html?channel=nu
 ```
 ### Full Featured Example URL
 ```
-https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive_full.html?channel=MyTwitchName&idle=IDLE_URL&reacting=TALK1,TALK2&question=QUES1,QUES2&exclaim=EXCL1,EXCL2&duration=1500&speed=150&random=true&talkdelay=3000
+https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive_advanced.html?channel=MyTwitchName&idle=IDLE_URL&reacting=TALK1,TALK2&question=QUES1,QUES2&exclaim=EXCL1,EXCL2&duration=1500&speed=150&random=true&talkdelay=3000
 ```
 ### Simple Example URL
 ```
