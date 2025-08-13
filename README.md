@@ -3,23 +3,25 @@ A lightweight browser-based Twitch chat reactive PNG overlay for OBS.
 Switches between an idle image and talking animation when chat messages arrive.
 ---
 ## Available Overlay Versions
-### 1) Original (chat_react.html)
+### 1) Original (chat_react.html)    
 Supports only `idle` and one `reacting` image with the inclusion of `duration` and `speed`
-### 2) Full Featured (chat_reactive_advanced.html)  
+### 2) Full Featured (chat_reactive_advanced.html)    
 Supports all parameters including special question/exclaim reactions, animation speed, random mode, talk delay, etc.  
 Best for advanced customization.
-### 3) Simple (chat_reactive_simple.html)  
+### 3) Simple (chat_reactive_simple.html)    
 Supports: `idle`, `reacting`, `duration`, `speed`, `random`  
 No special reactions (`question` or `exclaim`). Easier URLs and setup.
-### 4) Minimal (chat_reactive_minimal.html)  
+### 4) Minimal (chat_reactive_minimal.html)    
 Supports only `idle` and one `reacting` image (no animation, no timing params).  
 Good for beginners or quick testing.
 ---
 ## How to Use
 Upload your PNG images somewhere with direct URLs (e.g., Imgur) and build a URL like this to use in OBS as a Browser Source.
+### Original Example URL
 ```
 https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive.html?channel=MyTwitchName&idle=IDLE_URL&reacting=eacting=REACT_URL&duration=2000
 ```
+### Working URL for nuckolpunch on twitch
 ```
 https://nuckolpunch.github.io/twitch-chat-reactive/chat_reactive.html?channel=nuckolpunch&idle=https://i.imgur.com/WryOIK9.png&reacting=https://i.imgur.com/v6c7Ext.png&duration=2000
 ```
