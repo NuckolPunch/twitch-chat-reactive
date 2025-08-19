@@ -21,45 +21,38 @@
 <body>
     <img id="image" alt="Reactive Image">
 
-    <script src="https://unpkg.com/tmi.js@1.8.5"></script>
+    <!-- ✅ reliable tmi.js build -->
+    <script src="https://cdn.jsdelivr.net/npm/tmi.js@1.8.5/dist/tmi.min.js"></script>
+
     <script>
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const channelName = urlParams.get('channel');
+            const channelName = (urlParams.get('channel') || "").toLowerCase();
             const idleImg = urlParams.get('idle');
             const talkingImg = urlParams.get('reacting');
             const duration = parseInt(urlParams.get('duration') || "1500");
 
             const imageEl = document.getElementById('image');
-
-            console.log("Idle image:", idleImg);
-            console.log("Talking image:", talkingImg);
-
-            // set initial image once page is fully loaded
             imageEl.src = idleImg;
+
+            if (!channelName) return;
 
             let client;
 
             function connect() {
-                console.log("Connecting to Twitch chat on:", channelName);
                 client = new tmi.Client({
                     channels: [channelName],
                     connection: { reconnect: true }
                 });
 
-                client.connect().catch(err => console.error("Connection error:", err));
+                client.connect().catch(() => {});
 
                 client.on('message', () => {
-                    console.log("Chat detected → showing talking image");
                     imageEl.src = talkingImg;
-                    setTimeout(() => {
-                        imageEl.src = idleImg;
-                        console.log("Reverted to idle image");
-                    }, duration);
+                    setTimeout(() => imageEl.src = idleImg, duration);
                 });
 
                 client.on('disconnected', () => {
-                    console.log("Disconnected — retrying in 5s...");
                     setTimeout(connect, 5000);
                 });
             }
@@ -69,4 +62,3 @@
     </script>
 </body>
 </html>
-
