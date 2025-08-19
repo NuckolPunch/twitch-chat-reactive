@@ -26,8 +26,8 @@
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const channelName = urlParams.get('channel');
-            const idleImg = urlParams.get('idle') || "https://i.imgur.com/OGNqSKg.png";
-            const talkingImg = urlParams.get('reacting') || "https://i.imgur.com/Hn5x3Jm.png";
+            const idleImg = urlParams.get('idle');
+            const talkingImg = urlParams.get('reacting');
             const duration = parseInt(urlParams.get('duration') || "1500");
 
             const imageEl = document.getElementById('image');
@@ -69,3 +69,4 @@
     </script>
 </body>
 </html>
+
