@@ -13,57 +13,59 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
         }
     </style>
 </head>
 <body>
-    <img id="image" src="" alt="Reactive Image">
+    <img id="image" alt="Reactive Image">
 
     <script src="https://unpkg.com/tmi.js@1.8.5"></script>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const channelName = urlParams.get('channel');
-        const idleImg = urlParams.get('idle') || "https://i.imgur.com/OGNqSKg.png"; 
-        const talkingImg = urlParams.get('reacting') || "https://i.imgur.com/Hn5x3Jm.png"; 
-        const duration = parseInt(urlParams.get('duration') || "1500");
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const channelName = urlParams.get('channel');
+            const idleImg = urlParams.get('idle') || "https://i.imgur.com/OGNqSKg.png";
+            const talkingImg = urlParams.get('reacting') || "https://i.imgur.com/Hn5x3Jm.png";
+            const duration = parseInt(urlParams.get('duration') || "1500");
 
-        const imageEl = document.getElementById('image');
+            const imageEl = document.getElementById('image');
 
-        console.log("Idle image:", idleImg);
-        console.log("Talking image:", talkingImg);
+            console.log("Idle image:", idleImg);
+            console.log("Talking image:", talkingImg);
 
-        // set initial image
-        imageEl.src = idleImg;
+            // set initial image once page is fully loaded
+            imageEl.src = idleImg;
 
-        let client;
+            let client;
 
-        function connect() {
-            console.log("Connecting to Twitch chat on:", channelName);
-            client = new tmi.Client({
-                channels: [channelName],
-                connection: { reconnect: true }
-            });
+            function connect() {
+                console.log("Connecting to Twitch chat on:", channelName);
+                client = new tmi.Client({
+                    channels: [channelName],
+                    connection: { reconnect: true }
+                });
 
-            client.connect().catch(err => console.error("Connection error:", err));
+                client.connect().catch(err => console.error("Connection error:", err));
 
-            client.on('message', () => {
-                console.log("Chat detected → showing talking image");
-                imageEl.src = talkingImg;
-                setTimeout(() => {
-                    imageEl.src = idleImg;
-                    console.log("Reverted to idle image");
-                }, duration);
-            });
+                client.on('message', () => {
+                    console.log("Chat detected → showing talking image");
+                    imageEl.src = talkingImg;
+                    setTimeout(() => {
+                        imageEl.src = idleImg;
+                        console.log("Reverted to idle image");
+                    }, duration);
+                });
 
-            client.on('disconnected', () => {
-                console.log("Disconnected — retrying in 5s...");
-                setTimeout(connect, 5000);
-            });
-        }
+                client.on('disconnected', () => {
+                    console.log("Disconnected — retrying in 5s...");
+                    setTimeout(connect, 5000);
+                });
+            }
 
-        connect();
+            connect();
+        };
     </script>
 </body>
 </html>
