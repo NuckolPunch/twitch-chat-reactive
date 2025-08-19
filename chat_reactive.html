@@ -49,14 +49,12 @@
             client.connect().catch(err => console.error("Connection error:", err));
 
             client.on('message', () => {
-
                 console.log("Chat detected → showing talking image");
                 imageEl.src = talkingImg;
                 setTimeout(() => {
                     imageEl.src = idleImg;
                     console.log("Reverted to idle image");
                 }, duration);
-
             });
 
             client.on('disconnected', () => {
