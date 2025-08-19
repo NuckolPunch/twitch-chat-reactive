@@ -23,20 +23,24 @@
 
     <script src="https://unpkg.com/tmi.js@1.8.5"></script>
     <script>
-        // Get URL params
         const urlParams = new URLSearchParams(window.location.search);
         const channelName = urlParams.get('channel');
-        const idleImg = urlParams.get('idle');
-        const talkingImg = urlParams.get('reacting');
+        const idleImg = urlParams.get('idle') || "https://i.imgur.com/OGNqSKg.png"; 
+        const talkingImg = urlParams.get('reacting') || "https://i.imgur.com/Hn5x3Jm.png"; 
         const duration = parseInt(urlParams.get('duration') || "1500");
 
         const imageEl = document.getElementById('image');
+
+        console.log("Idle image:", idleImg);
+        console.log("Talking image:", talkingImg);
+
+        // set initial image
         imageEl.src = idleImg;
 
         let client;
 
         function connect() {
-            console.log("Connecting to Twitch chat...");
+            console.log("Connecting to Twitch chat on:", channelName);
             client = new tmi.Client({
                 channels: [channelName],
                 connection: { reconnect: true }
@@ -45,8 +49,14 @@
             client.connect().catch(err => console.error("Connection error:", err));
 
             client.on('message', () => {
+
+                console.log("Chat detected → showing talking image");
                 imageEl.src = talkingImg;
-                setTimeout(() => imageEl.src = idleImg, duration);
+                setTimeout(() => {
+                    imageEl.src = idleImg;
+                    console.log("Reverted to idle image");
+                }, duration);
+
             });
 
             client.on('disconnected', () => {
